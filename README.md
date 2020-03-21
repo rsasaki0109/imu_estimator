@@ -1,7 +1,6 @@
 imu_estimator
 ====
-ros2 dashing package of attitude estimator using imu
-
+ros2 dashing example
 - input  
 
 /imu/data  (sensor_msgs/Imu)(gyro and acc)
