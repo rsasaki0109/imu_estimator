@@ -1,5 +1,6 @@
 imu_estimator
 ====
+![CI](https://github.com/rsasaki0109/imu_estimator/workflows/CI/badge.svg)  
 ros2 dashing example
 - input  
 
