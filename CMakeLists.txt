@@ -56,7 +56,7 @@ ament_target_dependencies(imu_estimator
 include_directories(
     include
     ${EIGEN3_INCLUDE_DIRS}
-  )
+)
 
 install(TARGETS
   imu_estimator
