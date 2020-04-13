@@ -1,0 +1,15 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/sasaki/ros2_ws/install/ros2bag/lib/python3.6/site-packages",
+        "/home/sasaki/ros2_ws/install/rosbag2_transport/lib/python3.6/site-packages",
+        "/home/sasaki/ros2_ws/install/pcl_apps_msgs/lib/python3.6/site-packages",
+        "/home/sasaki/ros2_ws/install/hermite_path_msgs/lib/python3.6/site-packages",
+        "/home/sasaki/ros2_ws/install/graphslam_ros2_msgs/lib/python3.6/site-packages",
+        "/opt/ros/dashing/lib/python3.6/site-packages",
+        "/home/sasaki/catkin_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/melodic/lib/python2.7/dist-packages"
+    ],
+    "files.associations": {
+        "chrono": "cpp"
+    }
+}
