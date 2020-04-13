@@ -17,7 +17,7 @@ Eigen::Vector3d acc{0, 0, 0};
 // output
 Eigen::Quaternion<double> quat;
 
-ekf.filterOneStep(quat, dt_imu, acc, gyro);
+ekf.filterOneStep(quat, dt, acc, gyro);
 ```
 
 ## ros2 dashing example
