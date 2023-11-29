@@ -20,7 +20,7 @@ Eigen::Quaternion<double> quat;
 ekf.filterOneStep(quat, dt, acc, gyro);
 ```
 
-## ros2 dashing example
+## ros2 example
 - input  
 
 /imu/data  (sensor_msgs/Imu)(gyro and acc)
