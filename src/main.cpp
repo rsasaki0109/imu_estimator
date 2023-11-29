@@ -34,8 +34,11 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <sensor_msgs/msg/imu.hpp>
-#include <tf2_sensor_msgs/tf2_sensor_msgs.h>
+#include <tf2_sensor_msgs/tf2_sensor_msgs.hpp>
 #include <tf2_ros/transform_broadcaster.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2/LinearMath/Matrix3x3.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 #include <chrono>
 
@@ -70,8 +73,12 @@ void imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg_ptr)
 
   double roll, pitch, yaw;
   Eigen::Vector3d rpy;
-  tf2::Quaternion previous_quat_tf(quat.x(), quat.y(), quat.z(), quat.w());
-  tf2::Matrix3x3(previous_quat_tf).getRPY(roll, pitch, yaw);
+
+  // convert to rpy according to ROS
+  tf2::Quaternion tf2_quat;
+  tf2::fromMsg(msg_ptr->orientation, tf2_quat);
+  tf2::Matrix3x3(tf2_quat).getRPY(roll, pitch, yaw);
+
   rpy(0) = roll;
   rpy(1) = pitch;
   rpy(2) = yaw;

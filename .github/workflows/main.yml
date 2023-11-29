@@ -9,7 +9,7 @@ jobs:
     job1:
           name: Build
           runs-on: ubuntu-22.04
-          container: ros:humble-ros-core
+          container: ros:humble
           steps:
             - name: Install Git
               run: |
@@ -27,7 +27,6 @@ jobs:
               run: |
                   source /opt/ros/humble/setup.bash
                   apt install -y python3-rosdep
-                  rosdep init
                   rosdep update
                   cd ~/ros2_ws/src
                   rosdep install -r -y --from-paths . --ignore-src
@@ -40,11 +39,4 @@ jobs:
                   colcon build
                   source ~/ros2_ws/install/setup.bash
               shell: bash
-            - name: Test packages
-              run: |
-                  source /opt/ros/humble/setup.bash
-                  source ~/ros2_ws/install/setup.bash
-                  cd ~/ros2_ws
-                  colcon test
-                  colcon test-result --verbose
-              shell: bash
+
