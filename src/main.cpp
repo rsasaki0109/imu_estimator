@@ -42,12 +42,16 @@
 EKFEstimator ekf;
 
 double previous_time_{-1};
+std::string node_name_{"imu_estimator"};
 
 void imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg_ptr)
 {
   double current_time_odom = msg_ptr->header.stamp.sec +
     msg_ptr->header.stamp.nanosec * 1e-9;
   if (previous_time_ == -1) {
+    RCLCPP_INFO(
+      rclcpp::get_logger(node_name_),
+      "Subscribed first message");
     previous_time_ = current_time_odom;
     return;
   }
@@ -72,11 +76,10 @@ void imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg_ptr)
   rpy(1) = pitch;
   rpy(2) = yaw;
 
-  std::cout << "----" << std::endl;
-  std::cout << "dt[s]:" << dt_imu << std::endl;
-  std::cout << "roll[deg]:" << rpy(0) * 180 / M_PI << std::endl;
-  std::cout << "pitch[deg]:" << rpy(1) * 180 / M_PI << std::endl;
-  std::cout << "yaw[deg]:" << rpy(2) * 180 / M_PI << std::endl;
+  RCLCPP_INFO(
+    rclcpp::get_logger(node_name_),
+    "roll[deg]: %f, pitch[deg]: %f, yaw[deg]: %f",
+    rpy(0) * 180 / M_PI, rpy(1) * 180 / M_PI, rpy(2) * 180 / M_PI);
 }
 
 int main(int argc, char * argv[])
@@ -88,7 +91,7 @@ int main(int argc, char * argv[])
 
   rclcpp::init(argc, argv);
 
-  auto node = rclcpp::Node::make_shared("imu_estimator");
+  auto node = rclcpp::Node::make_shared(node_name_);
 
   rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_sub_ =
     node->create_subscription<sensor_msgs::msg::Imu>(
